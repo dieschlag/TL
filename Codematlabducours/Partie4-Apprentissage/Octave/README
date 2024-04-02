@@ -1,0 +1,96 @@
+Note : c'est surtout le programme "uncontretous.m" que vous avez à adapter pour le TL. Le reste
+du code n'est normalement pas à modifier.
+
+
+Répertoires
+-----------
+
+Il faut télécharger les deux fichiers SONS.tgz et SONS-VC.tgz, qui contiennent tous les sons ;
+ou bien les deux répertoires SONS et SONS-VC, directement et plus simplement, sous TEAMS.
+Les deux fichiers ont été créés avec les commandes "tar cfvz SONS.tgz SONS" et 
+"tar cfvz SONS-VC.tgz SONS-VC", sous Linux. Pour extraire les répertoires et les fichiers que
+ces deux archives contiennent, faites ainsi (sous Linux ; sous Windows, les décompresseurs
+existant doivent être capables de le faires aussi) : "tar xfvz SONS.tgz" et "tar xfvz SONS-VC.tgz".
+Et, du coup, vous récupérez deux répertoires SONS et SONS-VC.
+
+SONS    : les sons d'oiseaux à classer sont sauvés dans ce répertoire, sous forme de .wav ;
+          ces sons-là doivent être utilisés pour faire l'apprentissage des classifieurs et
+          estimer l'erreur d’apprentissage (ou risque empirique) ; et pour obtenir les
+          performances de généralisation (ou risque espéré, ou réel) ;
+          il y a 1000 fichiers par oiseau ; chaque fichier contient un "trille" long de 50 ms
+SONS-VC : ces sons doivent être utilisés pour obtenir les performances en validation croisée
+
+figures    : certains .eps/.ps sont sauvés dans ce répertoire (pour mes slides, par exemple)
+data_files : répertoire utilisé par l'optimiseur SMO (pas très utile pour vous)
+LOGFILES   : certains programmes écrivent des fichiers .log là-dedans (pas très utile pour vous)
+
+
+Programmes pour la PCA et la KPCA
+---------------------------------
+
+test_pcakpca_ecole.m : script pour comparer la PCA et la KPCA (utilise les 2 fonctions qui suivent)
+lagis_kpca.m         : fonction calculant la KPCA
+lagis_pca.m          : fonction calculant la PCA
+
+
+Programmes pour les SVM 1 classe
+--------------------------------
+
+test_optimisation_loqo_svm1classe.m : l'optimiseur LOQO seul est utilisé
+
+test_optimisation_smo_svm1classe.m : script qui compare SMO à LOQO pour les SVM 1 classe
+lagis_smo_1classe.m                : fonction principale pour le calcul des SVM 1 classe avec SMO
+lagis_svm_1classe_noyau_nd.m       : fonction outil (lanceur de l'optimiseur LOQO, qui est dans pr_loqo3.m)
+
+examineExemple_1classe.m : outil pour les SVM 1 classe (équivalent à examineExample.m pour les SVM 2 classes)
+pas_1classe.m            : outil pour les SVM 1 classe (équivalent à takeStep.m pour les SVM 2 classes)
+noyau_fonc_1classe.m     : outil pour les SVM 1 classe (équivalent à kernel_func.m pour les SVM 2 classes)
+sage_fonc_1classe.m      : outil pour les SVM 1 classe (équivalent à learned_func.m pour les SVM 2 classes)
+
+
+Programmes pour les SVM 2 classes
+---------------------------------
+
+test_optimisation_loqo_svm2classes.m : l'optimiseur LOQO seul est utilisé
+
+test_optimisation_smo_svm2classes.m : script qui compare SMO à LOQO pour les SVM 2 classes
+lagis_smo_2classes.m                : fonction principale pour le calcul des SVM 2 classes avec SMO
+
+examineExample.m : outil pour les SVM 2 classes
+takeStep.m       : outil pour les SVM 2 classes
+kernel_func.m    : outil pour les SVM 2 classes
+learned_func.m   : outil pour les SVM 2 classes
+
+uncontretous.m      : SVM 2 classes utilisés pour un problème à 3 classes 
+                      =>  stratégie Un contre tous mise en place
+uncontretousoutil.m : outil pour le programme précédent
+                      (à examiner : notamment parce que les SVM 2 classes y sont étendus au cas 
+                      où il n'y a pas le même nombre de points par classe) 
+
+
+Trois fonctions outils sont utilisées par les SVM 1 classe et les SVM 2 classes
+-------------------------------------------------------------------------------
+
+pr_loqo3.m           : outil utilisant l'optimiseur pour trouver les alphas
+lagis_rbf_gaussien.m : outil pour calculer la sortie du noyau RBF gaussien
+flush.m              : pour pallier le fait que 'matlab' n'a pas besoin de vider son 'stdin', 
+                       contrairement à 'octave'
+
+
+Programmes pour les mesures de dissimilarité (pour les SVM 1 classe)
+--------------------------------------------------------------------
+
+lagis_qualite_mesures_nclasses.m : compare les 3 mesures de dissimilarité
+(exemples du cours : slides 242 à 253)
+
+
+Fichiers de données
+-------------------
+
+featuresoiseau1.txt : features extraits pour les fichiers de SONS concernant l'oiseau 1
+featuresoiseau2.txt : features extraits pour les fichiers de SONS concernant l'oiseau 2
+featuresoiseau3.txt : features extraits pour les fichiers de SONS concernant l'oiseau 3
+
+
+Stéphane Rossignol -- 2021/2023
+
