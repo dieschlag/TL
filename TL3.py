@@ -53,10 +53,28 @@ def train_classifier(features, labels, classifier_type='knn'):
     return classifier
 
 # Chargement des données d'entraînement depuis le répertoire SONS
-train_features, train_labels = load_data('Documents/CENTRALE 2A/ST7/TL/SONS')
+train_features, train_labels = load_data('Documents/CENTRALE 2A/ST7/TL')
 
 # Entraînement du classifieur KNN
 knn_classifier = train_classifier(train_features, train_labels, classifier_type='knn')
 
 # Entraînement du classifieur GMM
 gmm_classifier = train_classifier(train_features, train_labels, classifier_type='gmm')
+
+
+#Évaluation des performances
+
+# Charger les données de validation croisée
+validation_features, validation_labels = load_data('Documents/CENTRALE 2A/ST7/TL')
+
+# Évaluer les performances du classifieur KNN sur les données de validation croisée
+validation_features_scaled = scaler.transform(validation_features)  # Normaliser les données de validation
+knn_predictions = knn_classifier.predict(validation_features_scaled)
+knn_accuracy = np.mean(knn_predictions == validation_labels)
+print("Accuracy of KNN classifier on cross-validation data:", knn_accuracy)
+
+# Évaluer les performances du classifieur GMM sur les données de validation croisée
+gmm_predictions = gmm_classifier.predict(validation_features_scaled)
+gmm_accuracy = np.mean(gmm_predictions == validation_labels)
+print("Accuracy of GMM classifier on cross-validation data:", gmm_accuracy)
+
